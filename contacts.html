@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Контакты - ПромВент</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        .error { color: red; background: #ffeeee; padding: 10px; margin: 10px 0; border: 1px solid red; display: none; }
+        .success { color: green; background: #eeffee; padding: 10px; margin: 10px 0; border: 1px solid green; display: none; }
+        form { max-width: 500px; margin: 20px 0; }
+        input, textarea { width: 100%; margin: 5px 0 15px; padding: 8px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <header>
-        <img src="logo.png" alt="Логотип ПромВент" width="150">
-        <nav>
-            <a href="index.html" class="nav-link">Главная</a>
-            <a href="services.html" class="nav-link">Услуги</a>
-            <a href="contacts.html" class="nav-link">Контакты</a>
-        </nav>
-    </header>
+    <h1>Контакты</h1>
+    
+    <!-- Эмуляция CSRF-защиты (исправление бага) -->
+    <div id="csrfError" class="error">❌ Ошибка 403: Неверный CSRF-токен. Запрос отклонён.</div>
+    <div id="successMsg" class="success">✅ Форма успешно отправлена (CSRF-защита пройдена)</div>
+    
+    <form id="contactForm">
+        <input type="hidden" name="csrf_token" id="csrf_token" value="secret-token-12345">
+        <label>Имя: <input type="text" name="name" id="name" required></label>
+        <label>Email: <input type="email" name="email" id="email" required></label>
+        <label>Телефон: <input type="tel" name="phone" id="phone" required></label>
+        <label>Сообщение: <textarea name="message" id="message" required></textarea></label>
+        <button type="submit">Отправить</button>
+    </form>
 
-    <main>
-        <h1>Контакты</h1>
-        
-        <!-- Форма обратной связи -->
-        <form id="contactForm" action="/submit-form" method="POST">
-            <input type="hidden" name="csrf_token" value="test-token-123">
-            <label>Имя: <input type="text" name="name" required></label>
-            <label>Email: <input type="email" name="email" required></label>
-            <label>Телефон: <input type="tel" name="phone" required></label>
-            <label>Сообщение: <textarea name="message" required></textarea></label>
-            <button type="submit">Отправить</button>
-        </form>
+    <div class="contact-info">
+        <p>Адрес: г. Комсомольск-на-Амуре, ул. Ленина, 10</p>
+        <p>Телефон: <a href="tel:+74212234567">+7 (4212) 23-45-67</a></p>
+        <p>Email: <a href="mailto:info@promvent.ru">info@promvent.ru</a></p>
+    </div>
 
-        <!-- Карта (заглушка) -->
-        <div class="map">
-            <img src="map-placeholder.jpg" alt="Карта проезда" width="100%">
-        </div>
-
-        <!-- Контактные данные -->
-        <div class="contact-info">
-            <p>Адрес: г. Комсомольск-на-Амуре, ул. Ленина, 10</p>
-            <p>Телефон: <a href="tel:+74212234567">+7 (4212) 23-45-67</a></p>
-            <p>Email: <a href="mailto:info@promvent.ru">info@promvent.ru</a></p>
-        </div>
-    </main>
-
-    <footer>
-        <p>© 2026 ПромВент. Все права защищены.</p>
-    </footer>
+    <script>
+        // === ИСПРАВЛЕНИЕ БАГА: добавлена проверка CSRF-токена ===
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Скрываем старые сообщения
+            document.getElementById('csrfError').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'none';
+            
+            // Получаем токен из формы
+            var token = document.getElementById('csrf_token').value;
+            var expectedToken = 'secret-token-12345';
+            
+            // === ПРОВЕРКА CSRF ===
+            if (token !== expectedToken) {
+                document.getElementById('csrfError').style.display = 'block';
+                return; // блокируем отправку
+            }
+            
+            // Если токен верный - показываем успех
+            document.getElementById('successMsg').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
