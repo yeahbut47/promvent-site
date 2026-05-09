@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - ПромВент</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Логотип ПромВент" width="150">
+        <nav>
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="services.html" class="nav-link">Услуги</a>
+            <a href="contacts.html" class="nav-link">Контакты</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Контакты</h1>
+        
+        <!-- Форма обратной связи -->
+        <form id="contactForm" action="/submit-form" method="POST">
+            <input type="hidden" name="csrf_token" value="test-token-123">
+            <label>Имя: <input type="text" name="name" required></label>
+            <label>Email: <input type="email" name="email" required></label>
+            <label>Телефон: <input type="tel" name="phone" required></label>
+            <label>Сообщение: <textarea name="message" required></textarea></label>
+            <button type="submit">Отправить</button>
+        </form>
+
+        <!-- Карта (заглушка) -->
+        <div class="map">
+            <img src="map-placeholder.jpg" alt="Карта проезда" width="100%">
+        </div>
+
+        <!-- Контактные данные -->
+        <div class="contact-info">
+            <p>Адрес: г. Комсомольск-на-Амуре, ул. Ленина, 10</p>
+            <p>Телефон: <a href="tel:+74212234567">+7 (4212) 23-45-67</a></p>
+            <p>Email: <a href="mailto:info@promvent.ru">info@promvent.ru</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 ПромВент. Все права защищены.</p>
+    </footer>
+</body>
+</html>
