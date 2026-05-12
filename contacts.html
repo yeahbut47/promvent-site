@@ -21,7 +21,8 @@
     <div id="successMsg" class="success">✅ Форма успешно отправлена (CSRF-защита пройдена)</div>
     
     <form id="contactForm">
-        <input type="hidden" name="csrf_token" id="csrf_token" value="secret-token-12345">
+        <!-- CSRF-защита включена -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <label>Имя: <input type="text" name="name" id="name" required></label>
         <label>Email: <input type="email" name="email" id="email" required></label>
         <label>Телефон: <input type="tel" name="phone" id="phone" required></label>
