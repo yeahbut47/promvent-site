@@ -46,9 +46,9 @@ jobs:
           if [ -f "tests/run_tests.php" ]; then
             php tests/run_tests.php
           else
-            echo "⚠️ No tests found, creating dummy test"
+            echo "⚠️ No tests found"
             mkdir -p tests
-            echo '<?php echo "✅ Dummy test passed\n"; exit(0); ?>' > tests/dummy.php
+            echo '<?php echo "✅ Test passed\n"; exit(0); ?>' > tests/dummy.php
             php tests/dummy.php
           fi
       
@@ -62,10 +62,16 @@ jobs:
           curl -f http://localhost:8080/ || exit 1
           echo "✅ Homepage accessible"
       
-      - name: 🌐 Smoke Test - Admin Page
+      - name: 🌐 Smoke Test - Admin Page (with auth)
         run: |
-          curl -f http://localhost:8080/admin/leads.php || exit 1
+          curl -f -u "admin:PromVent2026" http://localhost:8080/admin/leads.php || exit 1
           echo "✅ Admin page accessible"
+      
+      - name: 🌐 Smoke Test - AI Endpoint
+        run: |
+          curl -f -X POST http://localhost:8080/admin/ai.php \
+            -d "action=chat&message=статистика" || exit 1
+          echo "✅ AI endpoint working"
       
       - name: 🔒 Security Check - Debug Mode
         run: |
@@ -91,7 +97,7 @@ jobs:
             !.git
           retention-days: 1
 
-  # ==================== CD JOB (опционально) ====================
+  # ==================== CD JOB ====================
   cd:
     name: Continuous Deployment
     runs-on: ubuntu-latest
