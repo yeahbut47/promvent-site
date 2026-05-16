@@ -1,0 +1,142 @@
+/* ========== FAQ ========== */
+.faq {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.faq__grid {
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 48px;
+    align-items: start;
+}
+
+.faq__items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq__item {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.faq__question {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: white;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1e2a3a;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.faq__question:hover {
+    background: #f1f5f9;
+}
+
+.faq__question i {
+    font-size: 1.2rem;
+    color: #1f6392;
+    transition: transform 0.3s ease;
+}
+
+.faq__item.active .faq__question i {
+    transform: rotate(180deg);
+}
+
+.faq__answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 24px;
+    border-top: 1px solid transparent;
+}
+
+.faq__item.active .faq__answer {
+    max-height: 300px;
+    padding: 0 24px 20px 24px;
+    border-top-color: #e2e8f0;
+}
+
+.faq__answer p {
+    color: #4a5568;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    margin: 16px 0 0;
+}
+
+.faq__ask {
+    background: linear-gradient(135deg, #1f6392 0%, #0e4a70 100%);
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    color: white;
+    position: sticky;
+    top: 100px;
+}
+
+.faq__ask-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.faq__ask-icon i {
+    font-size: 2rem;
+}
+
+.faq__ask h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.faq__ask p {
+    font-size: 0.8rem;
+    margin-bottom: 24px;
+    opacity: 0.9;
+}
+
+.faq__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.faq__ask-phone {
+    margin-top: 0px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
+}
+
+.faq__phone {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: 4px;
+    transition: opacity 0.2s;
+}
+
+.faq__phone:hover {
+    opacity: 0.85;
+    color: white;
+}

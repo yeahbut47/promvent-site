@@ -1,0 +1,170 @@
+/* ========== МОДАЛЬНЫЕ ОКНА ========== */
+.modal, .service-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+    backdrop-filter: blur(8px);
+}
+
+.modal.active, .service-modal.active {
+    display: flex;
+}
+
+.modal__content, .service-modal__content {
+    background: white;
+    max-width: 550px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 40px 32px;
+    border-radius: 28px;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+    scrollbar-width: none;
+}
+
+.modal__content::-webkit-scrollbar,
+.service-modal__content::-webkit-scrollbar {
+    display: none;
+}
+
+.modal__close, .service-modal__close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #6c7a89;
+    transition: color 0.2s;
+}
+
+.modal__close:hover, .service-modal__close:hover {
+    color: #1f3b4c;
+}
+
+.modal__content h3, .service-modal__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1e2a3a;
+    margin-bottom: 24px;
+    padding-right: 30px;
+}
+
+.modal__content p {
+    margin-bottom: 24px;
+    color: #6c7a89;
+}
+
+.modal__input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 44px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    background: white;
+}
+
+.modal__input:focus {
+    outline: none;
+    border-color: #1f6392;
+    box-shadow: 0 0 0 3px rgba(31, 99, 146, 0.1);
+}
+
+.modal__note {
+    font-size: 0.7rem;
+    margin-top: 16px;
+    text-align: center;
+    color: #a0aec0;
+}
+
+.service-modal__list {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+}
+
+.service-modal__list li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    font-size: 0.9rem;
+    color: #4a5568;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.service-modal__list li:last-child {
+    border-bottom: none;
+}
+
+.service-modal__list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #1f6392;
+    font-weight: bold;
+}
+
+.service-modal__info {
+    background: #f8fafc;
+    padding: 16px 20px;
+    border-radius: 16px;
+    margin: 16px 0 24px;
+}
+
+.service-modal__info p {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: #4a5568;
+}
+
+.service-modal__btn {
+    width: 100%;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО УВЕДОМЛЕНИЙ ========== */
+#notificationModal .modal__content {
+    text-align: center;
+    animation: modalFadeIn 0.3s ease;
+}
+
+#notificationModal h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1e2a3a;
+}
+
+#notificationModal p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ========== ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ ========== */
+.privacy-content {
+    font-size: 0.75rem;
+    color: #4a5568;
+    line-height: 1.6;
+    padding-right: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.privacy-content p { margin-bottom: 12px; }
+.privacy-content strong { color: #1f6392; }
+.privacy-content ul { margin-left: 20px; margin-bottom: 15px; }
+.privacy-content li { margin-bottom: 4px; }
