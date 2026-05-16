@@ -1,0 +1,13 @@
+{
+    "name": "promvent/website",
+    "description": "ПромВент - ремонт промышленного оборудования",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "scripts": {
+        "test": "php tests/run_tests.php",
+        "lint": "php -l index.php && php -l admin/leads.php && php -l admin/ai.php && php -l admin/delete_lead.php && php -l backend/api.php && php -l backend/config.php",
+        "build": "echo ✅ Build completed successfully"
+    }
+}
