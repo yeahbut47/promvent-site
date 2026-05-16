@@ -237,15 +237,6 @@ if ($indexContent && strpos($indexContent, 'client-ai-assistant') !== false) {
     $passed++;
 }
 
-echo "Test: Force fail... ";
-if (1 === 2) {
-    echo "✅ PASSED\n";
-} else {
-    echo "❌ FAILED\n";
-    exit(1);
-}
-
-
 echo "\n";
 echo "============================================================\n";
 echo "  Test Summary: $passed passed, $failed failed\n";
