@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="Ремонт промышленной вентиляции, автоматики и кондиционеров. Профессиональное обслуживание промышленного оборудования.">
+    <title>ПромВент | Ремонт промышленного оборудования</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ========== ХЕДЕР ========== -->
+<header class="header">
+    <div class="container">
+        <div class="header__inner">
+            <div class="logo">
+                <span class="logo__text">ПромВент</span>
+            </div>
+            <nav class="nav">
+                <a href="#categories" class="nav__link">Услуги</a>
+                <a href="#about" class="nav__link">О нас</a>
+                <a href="#projects" class="nav__link">Наши проекты</a>
+                <a href="#faq" class="nav__link">Вопрос-Ответ</a>
+                <a href="#contacts" class="nav__link">Контакты</a>
+            </nav>
+            <div class="header-phone">
+                <i class="bi bi-telephone"></i>
+                <a href="tel:+79999999999">+7 (999) 999-99-99</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu__inner">
+            <a href="#categories" class="mobile-nav__link">Услуги</a>
+            <a href="#about" class="mobile-nav__link">О нас</a>
+            <a href="#projects" class="mobile-nav__link">Наши проекты</a>
+            <a href="#faq" class="mobile-nav__link">Вопрос-Ответ</a>
+            <a href="#contacts" class="mobile-nav__link">Контакты</a>
+            <a href="tel:+79999999999" class="mobile-phone">+7 (999) 999-99-99</a>
+        </div>
+    </div>
+</header>
+
+<!-- ========== СЛАЙДЕР ========== -->
+<section class="hero">
+    <div class="hero__slider">
+        <div class="hero__track" id="sliderTrack">
+            <div class="hero__slide hero__slide-1">
+                <div class="hero__overlay"></div>
+                <div class="hero__content">
+                    <div class="hero__text-wrapper">
+                        <span class="hero__tag">Любые типы систем</span>
+                        <h1 class="hero__title">Ремонт промышленной вентиляции</h1>
+                        <p class="hero__desc">Восстановление вытяжных и приточных систем на любом производстве</p>
+                        <button class="btn btn--primary open-form-btn">Оставить заявку</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__slide hero__slide-2">
+                <div class="hero__overlay"></div>
+                <div class="hero__content">
+                    <div class="hero__text-wrapper">
+                        <span class="hero__tag">Современные технологии</span>
+                        <h2 class="hero__title">Настройка и ремонт автоматики</h2>
+                        <p class="hero__desc">Диагностика, замена контроллеров, настройка систем автоматизации</p>
+                        <button class="btn btn--primary open-form-btn">Оставить заявку</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__slide hero__slide-3">
+                <div class="hero__overlay"></div>
+                <div class="hero__content">
+                    <div class="hero__text-wrapper">
+                        <span class="hero__tag">Любые хладагенты</span>
+                        <h2 class="hero__title">Ремонт промышленных кондиционеров</h2>
+                        <p class="hero__desc">Чиллеры, фанкойлы, крышные установки, работа с любыми хладагентами</p>
+                        <button class="btn btn--primary open-form-btn">Оставить заявку</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="hero__arrow hero__arrow--prev" id="heroPrev">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="hero__arrow hero__arrow--next" id="heroNext">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+        <div class="hero__dots" id="sliderDots">
+            <span class="hero__dot active-dot" data-index="0"></span>
+            <span class="hero__dot" data-index="1"></span>
+            <span class="hero__dot" data-index="2"></span>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ПРЕИМУЩЕСТВА ========== -->
+<section class="advantages">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Наши преимущества</h2>
+        </div>
+        <div class="advantages__grid">
+            <div class="advantage-card">
+                <div class="advantage-card__icon"><i class="bi bi-building"></i></div>
+                <h3>Опыт с 2010 года</h3>
+                <p>Более 500 выполненных проектов</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-card__icon"><i class="bi bi-lightning-charge"></i></div>
+                <h3>Срочный выезд</h3>
+                <p>Выезд специалиста за 2 часа</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-card__icon"><i class="bi bi-shield-check"></i></div>
+                <h3>Гарантия до 2 лет</h3>
+                <p>На все виды работ</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-card__icon"><i class="bi bi-headset"></i></div>
+                <h3>Консультация 24/7</h3>
+                <p>По телефону в любое время</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== КАТЕГОРИИ УСЛУГ ========== -->
+<section class="categories" id="categories">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Что мы предлагаем</h2>
+        </div>
+        <div class="categories__grid">
+            <div class="category-card">
+                <div class="category-card__image">
+                    <img src="assets/industrial-ventilation-repair.jpg" alt="Вентиляция">
+                    <div class="category-card__overlay"></div>
+                </div>
+                <div class="category-card__content">
+                    <h3 class="category-card__title">Ремонт промышленной вентиляции</h3>
+                    <div class="category-card__buttons">
+                        <button class="category-card__link open-details" data-modal="modal-ventilation">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-card__image">
+                    <img src="assets/industrial-control-cabinet.jpg" alt="Автоматика">
+                    <div class="category-card__overlay"></div>
+                </div>
+                <div class="category-card__content">
+                    <h3 class="category-card__title">Настройка и ремонт автоматики</h3>
+                    <div class="category-card__buttons">
+                        <button class="category-card__link open-details" data-modal="modal-automation">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+            <div class="category-card">
+                <div class="category-card__image">
+                    <img src="assets/industrial-chiller-repair.jpg" alt="Кондиционеры">
+                    <div class="category-card__overlay"></div>
+                </div>
+                <div class="category-card__content">
+                    <h3 class="category-card__title">Ремонт промышленных кондиционеров</h3>
+                    <div class="category-card__buttons">
+                        <button class="category-card__link open-details" data-modal="modal-ac">Подробнее</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== МОДАЛЬНЫЕ ОКНА ДЛЯ ПОДРОБНОСТЕЙ УСЛУГ ========== -->
+<div id="modal-ventilation" class="service-modal">
+    <div class="service-modal__content">
+        <button class="service-modal__close">&times;</button>
+        <h3 class="service-modal__title">Ремонт промышленной вентиляции</h3>
+        <ul class="service-modal__list">
+            <li>Диагностика систем вентиляции</li>
+            <li>Ремонт или замена вентиляторов и двигателей</li>
+            <li>Ремонт или замена теплообменников</li>
+            <li>Ремонт калориферов (водяных и электрических)</li>
+            <li>Замена фильтров и фильтровальных секций</li>
+            <li>Восстановление воздуховодов</li>
+            <li>Балансировка и настройка системы</li>
+            <li>Автоматизация работы вентиляции</li>
+        </ul>
+        <div class="service-modal__info">
+            <p><strong>Производители:</strong> Systemair, Ventmachine, Веза, Лиссант, Ostberg, Ruck, Wolf, Swegon</p>
+            <p><strong>Сроки работ:</strong> от 1 дня</p>
+            <p><strong>Гарантия:</strong> до 24 месяцев</p>
+        </div>
+        <button class="btn btn--primary service-modal__btn close-and-open">Оставить заявку</button>
+    </div>
+</div>
+
+<div id="modal-automation" class="service-modal">
+    <div class="service-modal__content">
+        <button class="service-modal__close">&times;</button>
+        <h3 class="service-modal__title">Настройка и ремонт автоматики</h3>
+        <ul class="service-modal__list">
+            <li>Диагностика щитов управления</li>
+            <li>Замена контроллеров (PLC, логических модулей)</li>
+            <li>Ремонт или замена блоков питания</li>
+            <li>Восстановление электропроводки</li>
+            <li>Замена датчиков (температуры, давления и др.)</li>
+            <li>Настройка программного обеспечения</li>
+            <li>Интеграция с диспетчерскими системами</li>
+            <li>Модернизация устаревших щитов</li>
+        </ul>
+        <div class="service-modal__info">
+            <p><strong>Производители:</strong> Siemens, Schneider Electric, ABB, Delta, Овен, Segnetics, ARIES, Mitsubishi</p>
+            <p><strong>Сроки работ:</strong> от 1 дня</p>
+            <p><strong>Гарантия:</strong> до 18 месяцев</p>
+        </div>
+        <button class="btn btn--primary service-modal__btn close-and-open">Оставить заявку</button>
+    </div>
+</div>
+
+<div id="modal-ac" class="service-modal">
+    <div class="service-modal__content">
+        <button class="service-modal__close">&times;</button>
+        <h3 class="service-modal__title">Ремонт промышленных кондиционеров</h3>
+        <ul class="service-modal__list">
+            <li>Ремонт компрессоров (спиральных, винтовых)</li>
+            <li>Заправка фреоном (R22, R410A, R407C, R134A)</li>
+            <li>Ремонт чиллеров (воздушного и водяного охлаждения)</li>
+            <li>Ремонт фанкойлов (замена вентиляторов, фильтров)</li>
+            <li>Ремонт прецизионных кондиционеров</li>
+            <li>Замена осушителей и фильтров</li>
+            <li>Очистка и промывка теплообменников</li>
+        </ul>
+        <div class="service-modal__info">
+            <p><strong>Производители:</strong> Carrier, Daikin, McQuay, Trane, York, Lennox, Clivet, Hitachi, Mitsubishi Electric</p>
+            <p><strong>Сроки работ:</strong> от 1 дня</p>
+            <p><strong>Гарантия:</strong> до 18 месяцев</p>
+        </div>
+        <button class="btn btn--primary service-modal__btn close-and-open">Оставить заявку</button>
+    </div>
+</div>
+
+<!-- ========== О КОМПАНИИ ========== -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="about__grid">
+            <div class="about__content">
+                <h2 class="section-title">О КОМПАНИИ «ПРОМВЕНТ»</h2>
+                <p>Ремонтом промышленного климатического оборудования занимаемся с 2010 года. Из небольшой бригады выросли в команду из 15 сертифицированных инженеров.</p>
+                <p>Пищевые производства, складские комплексы и торговые центры доверяют нам свои системы. Главный принцип — обеспечить долгую и стабильную работу без аварийных остановок.</p>
+                <div class="about__stats">
+                    <div class="stat">
+                        <span class="stat__number">15+</span>
+                        <span class="stat__label">лет на рынке</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">15</span>
+                        <span class="stat__label">инженеров</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat__number">100+</span>
+                        <span class="stat__label">постоянных клиентов</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about__image">
+                <img src="assets/about-company.jpg" alt="О компании ПромВент">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== НАШИ ПРОЕКТЫ ========== -->
+<section class="projects" id="projects">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Наши проекты</h2>
+        </div>
+        <div class="projects__slider">
+            <div class="projects__track" id="projectsTrack">
+                <div class="projects__slide">
+                    <div class="projects__card">
+                        <div class="projects__images">
+                            <div class="projects__before">
+                                <span class="projects__label">До</span>
+                                <img src="assets/project1-before.jpg" alt="До ремонта">
+                            </div>
+                            <div class="projects__after">
+                                <span class="projects__label">После</span>
+                                <img src="assets/project1-after.jpg" alt="После ремонта">
+                            </div>
+                        </div>
+                        <h3 class="projects__title">Ремонт вентиляции на складе</h3>
+                        <p class="projects__desc">Полная замена воздуховодов и модернизация системы</p>
+                    </div>
+                </div>
+                <div class="projects__slide">
+                    <div class="projects__card">
+                        <div class="projects__images">
+                            <div class="projects__before">
+                                <span class="projects__label">До</span>
+                                <img src="assets/project2-before.jpg" alt="До ремонта">
+                            </div>
+                            <div class="projects__after">
+                                <span class="projects__label">После</span>
+                                <img src="assets/project2-after.jpg" alt="После ремонта">
+                            </div>
+                        </div>
+                        <h3 class="projects__title">Модернизация щита управления</h3>
+                        <p class="projects__desc">Замена контроллеров и настройка автоматики</p>
+                    </div>
+                </div>
+                <div class="projects__slide">
+                    <div class="projects__card">
+                        <div class="projects__images">
+                            <div class="projects__before">
+                                <span class="projects__label">До</span>
+                                <img src="assets/project3-before.jpg" alt="До ремонта">
+                            </div>
+                            <div class="projects__after">
+                                <span class="projects__label">После</span>
+                                <img src="assets/project3-after.jpg" alt="После ремонта">
+                            </div>
+                        </div>
+                        <h3 class="projects__title">Ремонт чиллера</h3>
+                        <p class="projects__desc">Восстановление компрессора и заправка фреоном</p>
+                    </div>
+                </div>
+                <div class="projects__slide">
+                    <div class="projects__card">
+                        <div class="projects__images">
+                            <div class="projects__before">
+                                <span class="projects__label">До</span>
+                                <img src="assets/project4-before.jpg" alt="До ремонта">
+                            </div>
+                            <div class="projects__after">
+                                <span class="projects__label">После</span>
+                                <img src="assets/project4-after.jpg" alt="После ремонта">
+                            </div>
+                        </div>
+                        <h3 class="projects__title">Вентиляция в ТЦ</h3>
+                        <p class="projects__desc">Балансировка и настройка системы</p>
+                    </div>
+                </div>
+            </div>
+            <button class="projects__arrow projects__arrow--prev" id="projectsPrev">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <button class="projects__arrow projects__arrow--next" id="projectsNext">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+            <div class="projects__dots" id="projectsDots"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ ========== -->
+<section class="faq" id="faq">
+    <div class="container">
+        <div class="section-header">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+        </div>
+        <div class="faq__grid">
+            <div class="faq__items">
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Сколько стоит диагностика?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Стоимость диагностики зависит от сложности оборудования и удалённости объекта. Базовая диагностика начинается от 5 000 ₽. Выезд специалиста на объект — от 3 000 ₽. Точную стоимость можно узнать после заявки или звонка.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Какие гарантии вы даете?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Предоставляем гарантию на все виды работ. На ремонт вентиляции — до 24 месяцев, на ремонт автоматики — до 18 месяцев, на ремонт кондиционеров — до 18 месяцев. Гарантия включает бесплатное устранение недостатков.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Сколько времени занимает ремонт?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Сроки зависят от сложности поломки. В среднем ремонт занимает от 1 до 5 дней. Аварийный выезд — за 2 часа. Точные сроки называем после диагностики.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Работаете ли вы с юридическими лицами?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Да, работаем как с физическими, так и с юридическими лицами. Заключаем договоры, предоставляем закрывающие документы (акты, счета-фактуры). Работаем с НДС и без НДС.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Есть ли у вас запчасти в наличии?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Да, на складе всегда есть основные запчасти: вентиляторы, двигатели, контроллеры, датчики, фильтры, компрессоры и фреон. Редкие позиции поставляем под заказ — от 2 до 5 дней.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Работаете ли в выходные и ночью?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Да, работаем. Режим работы: Пн-Пт с 9:00 до 20:00, Сб-Вс с 10:00 до 18:00. Аварийный выезд возможен в любое время суток по отдельному тарифу.</p>
+                    </div>
+                </div>
+                <div class="faq__item">
+                    <button class="faq__question">
+                        <span>Как быстро вы можете приехать на объект?</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </button>
+                    <div class="faq__answer">
+                        <p>Срочный выезд — за 2 часа в пределах города. Выезд в другой город — от 1 дня. Аварийная бригада работает круглосуточно.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок "Не нашли свой вопрос?" -->
+            <div class="faq__ask">
+                <div class="faq__ask-icon">
+                    <i class="bi bi-chat-dots"></i>
+                </div>
+                <h3>Не нашли свой вопрос?</h3>
+                <p>Напишите нам — мы ответим в течение 15 минут</p>
+                <form class="faq__form" id="faqQuestionForm">
+                    <div class="faq__form-group">
+                        <textarea placeholder="Введите ваш вопрос..." class="faq__textarea" id="faqQuestion" rows="3"></textarea>
+                        <span class="error-message" id="faqQuestionError"></span>
+                    </div>
+                    <div class="faq__form-group">
+                        <input type="text" placeholder="Ваше имя" class="faq__input" id="faqName">
+                        <span class="error-message" id="faqNameError"></span>
+                    </div>
+                    <div class="faq__form-group">
+                        <input type="tel" placeholder="+7 (___) ___-__-__" class="faq__input" id="faqPhone">
+                        <span class="error-message" id="faqPhoneError"></span>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--small" id="sendQuestionBtn">Отправить вопрос</button>
+                    <p class="faq__consent">Нажимая на кнопку, вы соглашаетесь с <a href="javascript:void(0)" onclick="openPrivacy()">политикой конфиденциальности</a></p>
+                </form>
+                <div class="faq__ask-phone">
+                    <span>Или позвоните:</span>
+                    <a href="tel:+79999999999" class="faq__phone">+7 (999) 999-99-99</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ГОТОВЫ НАЧАТЬ РЕМОНТ? ========== -->
+<section class="cta">
+    <div class="container">
+        <div class="cta__card">
+            <div class="cta__content">
+                <h2 class="cta__title">Готовы начать ремонт?</h2>
+                <p class="cta__desc">Оставьте заявку — мы свяжемся с вами через 5 минут и обсудим детали</p>
+                <form class="cta__form" id="ctaForm">
+                    <div class="cta__form-group">
+                        <input type="text" placeholder="Ваше имя" class="cta__input" id="ctaName">
+                        <div class="cta-error-message" id="ctaNameError"></div>
+                    </div>
+                    <div class="cta__form-group">
+                        <input type="tel" placeholder="+7 (___) ___-__-__" class="cta__input" id="ctaPhone">
+                        <div class="cta-error-message" id="ctaPhoneError"></div>
+                    </div>
+                    <div class="cta__form-group">
+                        <div class="custom-select" id="customSelect">
+                            <div class="custom-select__trigger">
+                                <span class="custom-select__placeholder">Что нужно отремонтировать?</span>
+                                <i class="bi bi-chevron-down"></i>
+                            </div>
+                            <div class="custom-select__options">
+                                <div class="custom-select__option" data-value="ventilation">Ремонт промышленной вентиляции</div>
+                                <div class="custom-select__option" data-value="automation">Настройка и ремонт автоматики</div>
+                                <div class="custom-select__option" data-value="ac">Ремонт промышленных кондиционеров</div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="ctaService" name="service">
+                        <div class="cta-error-message" id="ctaServiceError"></div>
+                    </div>
+                    <button type="submit" class="btn btn--primary btn--large cta__btn" id="ctaSubmitBtn">Отправить заявку</button>
+                    <p class="cta__consent">Нажимая на кнопку, вы соглашаетесь с <a href="javascript:void(0)" onclick="openPrivacy()">политикой конфиденциальности</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== ПОДВАЛ ========== -->
+<footer class="footer" id="contacts">
+    <div class="container">
+        <div class="footer__inner">
+            <div class="footer__col">
+                <div class="footer__logo">ПромВент</div>
+                <p>Профессиональный ремонт промышленного оборудования</p>
+            </div>
+            <div class="footer__col">
+                <h4>Контакты</h4>
+                <p><i class="bi bi-telephone"></i> <a href="tel:+79999999999">+7 (999) 999-99-99</a></p>
+                <p><i class="bi bi-envelope"></i> <a href="mailto:info@promvent.ru">info@promvent.ru</a></p>
+            </div>
+            <div class="footer__col">
+                <h4>Режим работы</h4>
+                <p>Пн-Пт: 9:00 — 20:00</p>
+                <p>Сб-Вс: 10:00 — 18:00</p>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="footer__social">
+                    <a href="#"><i class="bi bi-telegram"></i></a>
+                    <a href="#"><i class="bi bi-whatsapp"></i></a>
+                    <a href="#"><i class="bi bi-vk"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© 2025 ПромВент — ремонт промышленного оборудования. Все права защищены.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== МОДАЛЬНОЕ ОКНО (ЗАЯВКА) ========== -->
+<div id="callbackModal" class="modal">
+    <div class="modal__content">
+        <button class="modal__close" id="closeModalBtn">&times;</button>
+        <h3>Оставить заявку</h3>
+        <p id="modalSlideInfo">Заполните форму, и мы свяжемся с вами</p>
+        <div class="modal__form-group">
+            <input type="text" placeholder="Ваше имя" class="modal__input" id="modalName">
+            <div class="modal-error-message" id="modalNameError"></div>
+        </div>
+        <div class="modal__form-group">
+            <input type="tel" placeholder="+7 (___) ___-__-__" class="modal__input" id="modalPhone">
+            <div class="modal-error-message" id="modalPhoneError"></div>
+        </div>
+        <button id="submitFakeBtn" class="btn btn--primary btn--full">Отправить заявку</button>
+        <p class="modal__note">Специалист свяжется с вами в ближайшее время</p>
+        <p class="modal__consent">Нажимая на кнопку, вы соглашаетесь с <a href="javascript:void(0)" onclick="openPrivacy()">политикой конфиденциальности</a></p>
+    </div>
+</div>
+
+<!-- ========== МОДАЛКА ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ ========== -->
+<div id="privacyModal" class="modal">
+    <div class="modal__content">
+        <button class="modal__close" id="closePrivacyBtn">&times;</button>
+        <h3>Политика конфиденциальности</h3>
+        <div class="privacy-content">
+            <p>Мы ценим и уважаем ваше право на конфиденциальность. Сбор персональных данных осуществляется исключительно для связи с вами и обработки ваших заявок.</p>
+            <p><strong>Какие данные мы собираем:</strong></p>
+            <ul>
+                <li>Ваше имя</li>
+                <li>Номер телефона</li>
+                <li>Информация о типе оборудования</li>
+            </ul>
+            <p><strong>Как мы используем данные:</strong></p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li>Для связи с вами по вопросам заявки</li>
+                <li>Для консультации по услугам</li>
+                <li>Мы не передаём данные третьим лицам</li>
+            </ul>
+            <p>Продолжая использовать наш сайт и отправляя форму, вы соглашаетесь с условиями данной политики.</p>
+            <p style="margin-top: 15px;">По всем вопросам вы можете связаться с нами по телефону <strong>+7 (999) 999-99-99</strong> или по email <strong>info@promvent.ru</strong>.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ========== КНОПКА НАВЕРХ ========== -->
+<button id="backToTop" class="back-to-top" aria-label="Наверх">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+
+<!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ УВЕДОМЛЕНИЙ ========== -->
+<div id="notificationModal" class="modal">
+    <div class="modal__content" style="max-width: 400px; text-align: center;">
+        <button class="modal__close" id="closeNotificationBtn">&times;</button>
+        <div style="font-size: 3rem; margin-bottom: 16px;">
+            <i class="bi bi-check-circle-fill" style="color: #1f6392;"></i>
+        </div>
+        <h3 id="notificationTitle" style="margin-bottom: 12px;">Успешно!</h3>
+        <p id="notificationMessage" style="margin-bottom: 24px; color: #4a5568;">Ваша заявка принята. Мы свяжемся с вами в ближайшее время.</p>
+        <button class="btn btn--primary" id="closeNotificationBtn2" style="width: 100%;">Хорошо</button>
+    </div>
+</div>
+
+<script type="module" src="js/main.js"></script>
+
+<script>
+// Глобальная функция для открытия модального окна
+function openCallbackModal() {
+    const modal = document.getElementById('callbackModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+</script>
+
+<script src="js/fix-modals.js"></script>
+
+<!-- ========== AI АССИСТЕНТ ДЛЯ КЛИЕНТОВ ========== -->
+<div class="client-ai-assistant" id="clientAiAssistant">
+    <div class="client-ai__toggle" id="clientAiToggle">
+        <i class="bi bi-robot"></i>
+        <span class="client-ai-badge">AI</span>
+    </div>
+    
+    <div class="client-ai__panel" id="clientAiPanel">
+    <div class="client-ai__header">
+        <div class="client-ai__title">
+            <i class="bi bi-robot"></i>
+            <span>Помощник ПромВент</span>
+        </div>
+        <button class="client-ai__close" id="clientAiClose">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+    
+    <div class="client-ai__messages" id="clientAiMessages">
+        <!-- ПРИВЕТСТВЕННОЕ СООБЩЕНИЕ -->
+        <div class="client-ai-message client-ai-message--bot">
+            <div class="client-ai-message__avatar">
+                <i class="bi bi-robot"></i>
+            </div>
+            <div class="client-ai-message__content">                👋 Здравствуйте! Я виртуальный помощник ПромВент.<br>
+                Я могу:<br>
+                • Рассказать об услугах компании
+                • Помочь с выбором оборудования
+                • Ответить на частые вопросы
+                • Связать вас со специалистом<br>
+                Задайте свой вопрос или нажмите на кнопку ниже!
+            </div>
+        </div>
+    </div>
+    
+    <!-- КНОПКИ ПОДСКАЗОК -->
+    <div class="client-ai-quick">
+        <button class="client-quick-btn" data-question="услуги">🔧 Услуги</button>
+        <button class="client-quick-btn" data-question="цены">💰 Цены</button>
+        <button class="client-quick-btn" data-question="сроки">⏱️ Сроки</button>
+        <button class="client-quick-btn" data-question="гарантия">✅ Гарантия</button>
+        <button class="client-quick-btn" data-question="контакты">📞 Контакты</button>
+        <button class="client-quick-btn" data-question="заявка">📝 Заявка</button>
+    </div>
+    
+    <div class="client-ai__typing" id="clientAiTyping">
+        <span>.</span><span>.</span><span>.</span>
+    </div>
+    
+    <div class="client-ai__input">
+        <input type="text" id="clientAiInput" placeholder="Задайте вопрос..." autocomplete="off">
+        <button id="clientAiSendBtn">
+            <i class="bi bi-send-fill"></i>
+        </button>
+    </div>
+</div>
+</div>
+
+<style>
+.client-ai-assistant {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    z-index: 9998;
+}
+
+.client-ai__toggle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #1f6392, #0e4a70);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(31, 99, 146, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.client-ai__toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(31, 99, 146, 0.5);
+}
+
+.client-ai__toggle i {
+    font-size: 28px;
+    color: white;
+}
+
+.client-ai-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 20px;
+    font-family: monospace;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+.client-ai__panel {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 380px;
+    height: 520px;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s ease;
+}
+
+.client-ai__panel.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.client-ai__header {
+    background: linear-gradient(135deg, #1f6392, #0e4a70);
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.client-ai__title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.client-ai__title i {
+    font-size: 22px;
+}
+
+.client-ai__close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    padding: 5px;
+}
+
+.client-ai__close:hover {
+    opacity: 1;
+}
+
+.client-ai__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #f8fafc;
+}
+
+.client-ai-message {
+    display: flex;
+    gap: 12px;
+    animation: messageSlideIn 0.3s ease;
+}
+
+.client-ai-message--user {
+    flex-direction: row-reverse;
+}
+
+.client-ai-message--user .client-ai-message__content {
+    background: #1f6392;
+    color: white;
+    border-radius: 20px 20px 4px 20px;
+}
+
+.client-ai-message__avatar {
+    width: 36px;
+    height: 36px;
+    background: #e2e8f0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.client-ai-message--user .client-ai-message__avatar {
+    background: #1f6392;
+    color: white;
+}
+
+.client-ai-message__avatar i {
+    font-size: 18px;
+}
+
+.client-ai-message__content {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 20px 20px 20px 4px;
+    max-width: 75%;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1e2a3a;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    white-space: pre-line;
+}
+
+.client-ai__input {
+    padding: 16px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 10px;
+}
+
+.client-ai__input input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 30px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.client-ai__input input:focus {
+    border-color: #1f6392;
+    box-shadow: 0 0 0 3px rgba(31, 99, 146, 0.1);
+}
+
+.client-ai__input button {
+    width: 44px;
+    height: 44px;
+    background: #1f6392;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-ai__input button:hover {
+    background: #0e4a70;
+    transform: scale(1.05);
+}
+
+.client-ai__input button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.client-ai__typing {
+    padding: 8px 20px 16px;
+    display: none;
+    gap: 4px;
+}
+
+.client-ai__typing span {
+    width: 8px;
+    height: 8px;
+    background: #1f6392;
+    border-radius: 50%;
+    display: inline-block;
+    animation: typingBounce 1.4s infinite;
+}
+
+.client-ai__typing span:nth-child(2) { animation-delay: 0.2s; }
+.client-ai__typing span:nth-child(3) { animation-delay: 0.4s; }
+
+.client-ai__typing.active {
+    display: flex;
+}
+
+.client-ai-quick {
+    padding: 12px 15px;
+    background: #ffffff;
+    border-top: 1px solid #eef2f6;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.client-quick-btn {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #1f6392;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    letter-spacing: 0.3px;
+}
+
+.client-quick-btn:hover {
+    background: linear-gradient(135deg, #1f6392 0%, #0e4a70 100%);
+    border-color: #1f6392;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(31, 99, 146, 0.25);
+}
+
+.client-quick-btn:active {
+    transform: translateY(0);
+    transition: 0.05s;
+}
+
+@keyframes typingBounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .client-ai__panel {
+        width: calc(100vw - 40px);
+        right: -10px;
+        bottom: 70px;
+        height: 480px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const aiToggle = document.getElementById('clientAiToggle');
+    const aiPanel = document.getElementById('clientAiPanel');
+    const aiClose = document.getElementById('clientAiClose');
+    const aiInput = document.getElementById('clientAiInput');
+    const aiSendBtn = document.getElementById('clientAiSendBtn');
+    const aiMessages = document.getElementById('clientAiMessages');
+    const aiTyping = document.getElementById('clientAiTyping');
+    
+    let isOpen = false;
+    
+    aiToggle.addEventListener('click', () => {
+        isOpen = !isOpen;
+        if (isOpen) {
+            aiPanel.classList.add('active');
+            aiInput.focus();
+        } else {
+            aiPanel.classList.remove('active');
+        }
+    });
+    
+    aiClose.addEventListener('click', () => {
+        isOpen = false;
+        aiPanel.classList.remove('active');
+    });
+    
+    function addMessage(text, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `client-ai-message ${isUser ? 'client-ai-message--user' : 'client-ai-message--bot'}`;
+        
+        const avatar = document.createElement('div');
+        avatar.className = 'client-ai-message__avatar';
+        avatar.innerHTML = isUser ? '<i class="bi bi-person"></i>' : '<i class="bi bi-robot"></i>';
+        
+        const content = document.createElement('div');
+        content.className = 'client-ai-message__content';
+        content.innerHTML = text.replace(/\n/g, '<br>');
+        
+        messageDiv.appendChild(avatar);
+        messageDiv.appendChild(content);
+        
+        aiMessages.appendChild(messageDiv);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+    
+    // Быстрые ответы на частые вопросы (без нейросети)
+    function getQuickResponse(message) {
+        const lowerMsg = message.toLowerCase();
+        
+        if (lowerMsg.includes('услуг') || lowerMsg.includes('ремонтируете') || lowerMsg.includes('что делаете')) {
+            return "🔧 Компания ПромВент занимается ремонтом промышленного оборудования:\n\n• Промышленная вентиляция\n• Автоматика и щиты управления\n• Промышленные кондиционеры (чиллеры, фанкойлы)\n\nОпыт работы с 2010 года, более 500 проектов. Какой у вас тип оборудования?";
+        }
+        
+        if (lowerMsg.includes('вентиляц')) {
+            return "🌬️ Ремонт промышленной вентиляции:\n\n• Диагностика систем\n• Замена вентиляторов и двигателей\n• Ремонт теплообменников\n• Восстановление воздуховодов\n• Балансировка и настройка\n\nГарантия до 24 месяцев. Оставьте заявку для расчёта стоимости!";
+        }
+        
+        if (lowerMsg.includes('автоматик') || lowerMsg.includes('щит')) {
+            return "⚡ Настройка и ремонт автоматики:\n\n• Диагностика щитов управления\n• Замена контроллеров (Siemens, Schneider Electric, ABB)\n• Настройка программного обеспечения\n\nГарантия до 18 месяцев.";
+        }
+        
+        if (lowerMsg.includes('кондицион') || lowerMsg.includes('чиллер')) {
+            return "❄️ Ремонт промышленных кондиционеров:\n\n• Ремонт компрессоров\n• Заправка фреоном (R22, R410A, R407C)\n• Ремонт чиллеров и фанкойлов\n\nРаботаем с Carrier, Daikin, Trane, York. Гарантия до 18 месяцев.";
+        }
+        
+        if (lowerMsg.includes('цен') || lowerMsg.includes('стоим') || lowerMsg.includes('сколько')) {
+            return "💰 Ориентировочные цены:\n\n• Диагностика: от 5 000 ₽\n• Выезд специалиста: от 3 000 ₽\n• Ремонт вентиляции: от 15 000 ₽\n• Ремонт автоматики: от 10 000 ₽\n• Ремонт кондиционеров: от 12 000 ₽\n\nТочную стоимость скажем после диагностики!";
+        }
+        
+        if (lowerMsg.includes('срок') || lowerMsg.includes('выезд') || lowerMsg.includes('долго')) {
+            return "⏱️ Сроки выполнения:\n\n• Аварийный выезд: за 2 часа\n• Простой ремонт: от 1 дня\n• Сложный ремонт: 3-5 дней\n• Запчасти под заказ: 2-5 дней\n\nВсё зависит от сложности поломки.";
+        }
+        
+        if (lowerMsg.includes('гарант')) {
+            return "✅ Гарантия на все виды работ:\n\n• Ремонт вентиляции: до 24 месяцев\n• Ремонт автоматики: до 18 месяцев\n• Ремонт кондиционеров: до 18 месяцев\n\nГарантия включает бесплатное устранение недостатков!";
+        }
+        
+        if (lowerMsg.includes('контакт') || lowerMsg.includes('телефон') || lowerMsg.includes('позвонить')) {
+            return "📞 Наши контакты:\n\n• Телефон: +7 (999) 999-99-99\n• Email: info@promvent.ru\n• Режим работы: Пн-Пт 9:00-20:00, Сб-Вс 10:00-18:00\n\nЖдём вашего звонка!";
+        }
+        
+        if (lowerMsg.includes('заявк') || lowerMsg.includes('оставить')) {
+            return "📝 Оставить заявку:\n\n1. Нажмите кнопку «Оставить заявку» на сайте\n2. Заполните форму в разделе «Готовы начать ремонт?»\n3. Позвоните: +7 (999) 999-99-99\n4. Напишите: info@promvent.ru\n\nМы перезвоним в течение 5 минут!";
+        }
+        
+        if (lowerMsg.includes('компани') || lowerMsg.includes('о вас')) {
+            return "🏢 Компания ПромВент работает с 2010 года. 15 инженеров, более 500 проектов, более 100 постоянных клиентов. Специализируемся на ремонте промышленного оборудования любой сложности.";
+        }
+        
+        if (lowerMsg.includes('привет') || lowerMsg.includes('здравствуй')) {
+            return "👋 Здравствуйте! Я ИИ-помощник ПромВент. Чем могу помочь?\n\nСпросите меня об услугах, ценах или контактах!";
+        }
+        
+        if (lowerMsg.includes('спасиб')) {
+            return "😊 Пожалуйста! Обращайтесь, если будут ещё вопросы. Хотите оставить заявку?";
+        }
+        
+        if (lowerMsg.includes('помощь') || lowerMsg.includes('что ты умеешь')) {
+            return "🤖 Я могу ответить на вопросы:\n\n• услуги - что ремонтируем\n• цены - стоимость работ\n• сроки - время выполнения\n• гарантия - наши гарантии\n• контакты - как связаться\n• заявка - как оставить заявку\n• о компании - кто мы и сколько работаем\n\nПросто напишите слово или задайте вопрос!";
+        }
+        
+        return null;
+    }
+    
+    // Вызов нейросети Ollama
+    async function callOllama(message) {
+    const prompt = `Ты - виртуальный помощник компании ПромВент.
+
+ВАЖНОЕ ПРАВИЛО: Ты ОБЯЗАН отвечать ТОЛЬКО на РУССКОМ языке. Ни слова на английском, испанском, немецком или любом другом языке. Только русский!
+
+ИНФОРМАЦИЯ О КОМПАНИИ:
+- Название: ПромВент
+- Услуги: ремонт промышленной вентиляции, автоматики, кондиционеров
+- Опыт: с 2010 года, 15 инженеров, 500+ проектов
+
+ГАРАНТИЯ (ВАЖНО):
+- На ВЕНТИЛЯЦИЮ: 24 месяца (2 года)
+- На АВТОМАТИКУ: 18 месяцев
+- На КОНДИЦИОНЕРЫ: 18 месяцев
+
+ПОЧЕМУ РАЗНЫЕ СРОКИ ГАРАНТИИ:
+Потому что вентиляция - основной вид услуг компании, мы специализируемся на ней с 2010 года, поэтому даём максимальную гарантию. На автоматику и кондиционеры гарантия 18 месяцев.
+
+ОТВЕТЬ НА ВОПРОС (ТОЛЬКО НА РУССКОМ ЯЗЫКЕ, НИ СЛОВА НА ДРУГИХ ЯЗЫКАХ):
+
+Вопрос: ${message}
+
+РУССКИЙ ОТВЕТ:`;
+
+    try {
+        const response = await fetch('http://localhost:11434/api/generate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'llama3.2:3b',
+                prompt: prompt,
+                stream: false,
+                temperature: 0.4,
+                max_tokens: 300,
+                repeat_penalty: 1.1
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.response) {
+            let answer = data.response.trim();
+            // Убираем возможные префиксы
+            answer = answer.replace(/^РУССКИЙ ОТВЕТ:\s*/i, '');
+            answer = answer.replace(/^Ответ:\s*/i, '');
+            return answer;
+        } else {
+            return "🤔 Не удалось получить ответ. Позвоните нам: +7 (999) 999-99-99";
+        }
+    } catch (error) {
+        console.error('Ollama error:', error);
+        return "⚠️ Нейросеть временно недоступна. Позвоните: +7 (999) 999-99-99";
+    }
+}
+
+function isRussian(text) {
+    // Проверяем, есть ли в тексте латиница (английские буквы)
+    const hasLatin = /[a-zA-Z]/.test(text);
+    // Если есть английские буквы - плохо
+    if (hasLatin) return false;
+    return true;
+}
+
+// Измените sendMessage, добавив проверку:
+async function sendMessage() {
+    const message = aiInput.value.trim();
+    if (!message) return;
+    
+    addMessage(message, true);
+    aiInput.value = '';
+    aiSendBtn.disabled = true;
+    aiTyping.classList.add('active');
+    
+    const quickResponse = getQuickResponse(message);
+    
+    if (quickResponse) {
+        setTimeout(() => {
+            aiTyping.classList.remove('active');
+            addMessage(quickResponse, false);
+            aiSendBtn.disabled = false;
+            aiInput.focus();
+        }, 200);
+    } else {
+        let aiResponse = await callOllama(message);
+        
+        // Если ответ содержит английские буквы - пробуем ещё раз
+        if (!isRussian(aiResponse)) {
+            console.log('Не русский ответ, пробуем ещё раз...');
+            const retryPrompt = `Ответь на этот вопрос ТОЛЬКО по-русски, без английских слов: ${message}`;
+            const retryResponse = await fetch('http://localhost:11434/api/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    model: 'llama3.2:3b',
+                    prompt: retryPrompt,
+                    stream: false,
+                    temperature: 0.3,
+                    max_tokens: 200
+                })
+            });
+            const retryData = await retryResponse.json();
+            if (retryData.response && isRussian(retryData.response)) {
+                aiResponse = retryData.response;
+            }
+        }
+        
+        aiTyping.classList.remove('active');
+        addMessage(aiResponse, false);
+        aiSendBtn.disabled = false;
+        aiInput.focus();
+    }
+}
+    
+    async function sendMessage() {
+        const message = aiInput.value.trim();
+        if (!message) return;
+        
+        addMessage(message, true);
+        aiInput.value = '';
+        aiSendBtn.disabled = true;
+        aiTyping.classList.add('active');
+        
+        // Сначала проверяем быстрые ответы
+        const quickResponse = getQuickResponse(message);
+        
+        if (quickResponse) {
+            setTimeout(() => {
+                aiTyping.classList.remove('active');
+                addMessage(quickResponse, false);
+                aiSendBtn.disabled = false;
+                aiInput.focus();
+            }, 200);
+        } else {
+            // Если не быстрый ответ - вызываем нейросеть
+            const aiResponse = await callOllama(message);
+            aiTyping.classList.remove('active');
+            addMessage(aiResponse, false);
+            aiSendBtn.disabled = false;
+            aiInput.focus();
+        }
+    }
+    
+    // Обработка быстрых кнопок
+    document.querySelectorAll('.client-quick-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            aiInput.value = btn.dataset.question;
+            sendMessage();
+        });
+    });
+    
+    aiSendBtn.addEventListener('click', sendMessage);
+    aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+});
+</script>
+
+</body>
+</html>
