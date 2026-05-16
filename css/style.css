@@ -1,0 +1,21 @@
+/* ========== ОСНОВНОЙ ФАЙЛ СТИЛЕЙ ========== */
+/* Импорт всех компонентов */
+
+/* Базовые стили */
+@import url('base.css');
+
+/* Компоненты */
+@import url('header.css');
+@import url('hero.css');
+@import url('advantages.css');
+@import url('categories.css');
+@import url('about.css');
+@import url('projects.css');
+@import url('faq.css');
+@import url('forms.css');
+@import url('modal.css');
+@import url('footer.css');
+@import url('components.css');
+
+/* Адаптив */
+@import url('responsive.css');

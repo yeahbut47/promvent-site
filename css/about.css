@@ -1,0 +1,70 @@
+/* ========== О КОМПАНИИ ========== */
+.about {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about__content .section-title {
+    text-align: left;
+    margin-bottom: 24px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #1e2a3a;
+}
+
+.about__content p {
+    color: #4a5568;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    text-align: justify;
+}
+
+.about__content {
+    max-width: 600px;
+}
+
+.about__stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat__number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1f6392;
+}
+
+.stat__label {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.about__image {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.about__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
