@@ -159,4 +159,4 @@ jobs:
       - name: Deployment complete
         run: |
           echo "Deployed commit ${{ github.sha }} to GitHub Pages"
-          echo "URL: https://julia-myaso00.github.io/promvent-site/"
+          echo "URL: https://yeahbut47.github.io/promvent-site/"
