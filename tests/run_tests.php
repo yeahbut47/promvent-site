@@ -52,7 +52,7 @@ function validate_name(string $name): bool {
         && !preg_match('/^[0-9]+$/', $trimmed);
 }
 
-function validate_question(string $q): bool {
+function validate_question(string $q): int {
     $len = strlen(trim($q));
     return $len >= 10 && $len <= 1000;
 }
