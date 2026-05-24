@@ -10,7 +10,7 @@
 ## 🔗 Полезные ссылки
 - **Документация проекта (Wiki):** [[ссылка на Яндекс Wiki]](https://wiki.yandex.ru/_i/#2ad29ea8-aae4-4856-846b-5cf8a5a71532)
 - **Макеты в Figma:** [[ссылка на Figma]](https://www.figma.com/design/fkIbpIghULpHXA2fmXWX8W/Prototyping-in-Figma?node-id=0-1&t=VDFqg6F5u7AlF2P6-1)
-- **Доска задач (Яндекс Трекер):** [[ссылка на доску]](https://tracker.yandex.ru/pages/projects/1)
+- **Доска задач (Яндекс Трекер):** [[ссылка на доску]](https://tracker.yandex.ru/pages/projects/1) 
 
 ## 👥 Команда
 | Роль | Имя |
