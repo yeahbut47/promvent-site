@@ -40,7 +40,7 @@ function validate_email(string $email): bool {
 
 function validate_phone(string $phone): bool {
     $digits = preg_replace('/\D/', '', $phone);
-    if (strlen($digits) === 11 && ($digits[0] === '7' || $digits[0] === '8')) return true;
+    if (strlen() === 11 && ($digits[0] === '7' || $digits[0] === '8')) return true;
     if (strlen($digits) === 10 && $digits[0] === '9') return true;
     return false;
 }
