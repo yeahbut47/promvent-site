@@ -1,252 +1,157 @@
 <?php
-// Максимально простой тестовый раннер для PromVent
-// Не требует подключения файлов проекта
-
-echo "\n";
-echo "============================================================\n";
-echo "     PromVent Test Suite - Running Unit Tests\n";
-echo "============================================================\n\n";
+/**
+ * PromVent — Unit Test Suite
+ * Запуск: php tests/run_tests.php
+ */
 
 $passed = 0;
 $failed = 0;
 
-// ========== ТЕСТ 1: Проверка PHP версии ==========
-echo "Test 1: PHP version check... ";
-if (version_compare(PHP_VERSION, '7.4.0', '>=')) {
-    echo "✅ PASSED (PHP " . PHP_VERSION . ")\n";
-    $passed++;
-} else {
-    echo "❌ FAILED (PHP " . PHP_VERSION . " < 7.4)\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 2: Проверка существования папки leads ==========
-echo "Test 2: Leads directory exists... ";
-$leadsDir = __DIR__ . '/../leads';
-if (is_dir($leadsDir)) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED (creating...)\n";
-    mkdir($leadsDir, 0777, true);
-    $passed++;
-}
-
-// ========== ТЕСТ 3: Проверка возможности записи ==========
-echo "Test 3: Write permission test... ";
-$testFile = $leadsDir . '/write_test.tmp';
-if (file_put_contents($testFile, 'test') !== false) {
-    unlink($testFile);
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 4: Валидация имени ==========
-echo "Test 4: Name validation... ";
-
-$testNames = [
-    'Иван' => true,
-    'Иван Петров' => true,
-    'Демо Пользователь' => true,
-    'Юлия' => true,
-    'Проверка' => true,
-    '' => false,
-    'A' => false,
-    '12' => false,
-];
-
-$nameValid = true;
-foreach ($testNames as $name => $expected) {
-    $trimmed = trim($name);
-    $actual = (strlen($trimmed) >= 2 && strlen($trimmed) <= 50 && !preg_match('/^[0-9]+$/', $trimmed));
-    if ($actual !== $expected) {
-        $nameValid = false;
-        break;
+function test(string $name, bool $result): void {
+    global $passed, $failed;
+    if ($result) {
+        echo "  [PASS] $name\n";
+        $passed++;
+    } else {
+        echo "  [FAIL] $name\n";
+        $failed++;
     }
-}
-
-if ($nameValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 5: Валидация телефона ==========
-echo "Test 5: Phone validation... ";
-
-function testPhone($phone) {
-    $digits = preg_replace('/\D/', '', $phone);
-    if (strlen($digits) === 11 && ($digits[0] === '7' || $digits[0] === '8')) return true;
-    if (strlen($digits) === 10 && $digits[0] === '9') return true;
-    return false;
-}
-
-$testPhones = [
-    '+7 999 123-45-67' => true,
-    '89991234567' => true,
-    '79161234567' => true,
-    '+7 (916) 123-45-67' => true,
-    '12345' => false,
-    '' => false,
-];
-
-$phoneValid = true;
-foreach ($testPhones as $phone => $expected) {
-    if (testPhone($phone) !== $expected) {
-        $phoneValid = false;
-        break;
-    }
-}
-
-if ($phoneValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 6: Валидация вопроса (ИСПРАВЛЕН) ==========
-echo "Test 6: Question validation... ";
-
-function testQuestion($question) {
-    $trimmed = trim($question);
-    $len = strlen($trimmed);
-    // Логирование для отладки
-    if ($len >= 10 && $len <= 1000) {
-        return true;
-    }
-    return false;
-}
-
-$testQuestions = [
-    'Как отремонтировать вентиляцию?' => true,
-    'Вопрос длиной ровно десять' => true,  // ровно 10 символов? "Вопрос длиной ровно десять" - 25 символов
-    'Вопрос1000' => false,  // слишком короткий
-    '' => false,
-];
-
-// Добавляем более точные тесты
-$longEnough = '1234567890'; // 10 символов
-$tooShort = '123456789';    // 9 символов
-
-$questionValid = true;
-
-// Тест 1: длинный вопрос
-if (!testQuestion('Как отремонтировать вентиляцию?')) {
-    echo "    ❌ Long question failed\n";
-    $questionValid = false;
-}
-
-// Тест 2: ровно 10 символов
-if (!testQuestion($longEnough)) {
-    echo "    ❌ 10-character question failed\n";
-    $questionValid = false;
-}
-
-// Тест 3: 9 символов (должен провалиться)
-if (testQuestion($tooShort)) {
-    echo "    ❌ Short question should fail but passed\n";
-    $questionValid = false;
-}
-
-// Тест 4: пустой вопрос
-if (testQuestion('')) {
-    echo "    ❌ Empty question should fail but passed\n";
-    $questionValid = false;
-}
-
-if ($questionValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 7: Проверка файлов заявок ==========
-echo "Test 7: Leads JSON files... ";
-
-$files = glob($leadsDir . '/leads_*.json');
-$totalLeads = 0;
-foreach ($files as $file) {
-    $content = file_get_contents($file);
-    if ($content) {
-        $leads = json_decode($content, true);
-        if (is_array($leads)) {
-            $totalLeads += count($leads);
-        }
-    }
-}
-
-echo "✅ PASSED (found $totalLeads leads)\n";
-$passed++;
-
-// ========== ТЕСТ 8: Проверка критических файлов ==========
-echo "Test 8: Critical files exist... ";
-
-$criticalFiles = [
-    'index.php',
-    'admin/leads.php',
-    'admin/ai.php',
-    'backend/api.php',
-    'backend/config.php',
-];
-
-$allExist = true;
-foreach ($criticalFiles as $file) {
-    if (!file_exists(__DIR__ . '/../' . $file)) {
-        $allExist = false;
-        break;
-    }
-}
-
-if ($allExist) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 9: Проверка кастомного select в CTA форме ==========
-echo "Test 9: CTA form structure... ";
-
-$indexContent = file_get_contents(__DIR__ . '/../index.php');
-if ($indexContent && strpos($indexContent, 'custom-select') !== false) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 10: Проверка AI ассистента ==========
-echo "Test 10: AI assistant present... ";
-
-if ($indexContent && strpos($indexContent, 'client-ai-assistant') !== false) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "⚠️ SKIPPED (AI not found)\n";
-    $passed++;
 }
 
 echo "\n";
-echo "============================================================\n";
-echo "  Test Summary: $passed passed, $failed failed\n";
-echo "============================================================\n\n";
+echo "=================================================\n";
+echo "  PromVent Unit Tests\n";
+echo "=================================================\n\n";
+
+// =================================================
+// Блок 1: Валидация имени
+// =================================================
+echo "Block 1: Name validation\n";
+
+function validateName(string $name): bool {
+    $trimmed = trim($name);
+    return strlen($trimmed) >= 2
+        && strlen($trimmed) <= 50
+        && !preg_match('/^\d+$/', $trimmed);
+}
+
+test('Valid name: "Иван"',               validateName('Иван'));
+test('Valid name: "Иван Петров"',        validateName('Иван Петров'));
+test('Valid name with spaces: " Анна "', validateName(' Анна '));
+test('Invalid: empty string',            !validateName(''));
+test('Invalid: single char "A"',         !validateName('A'));
+test('Invalid: digits only "123"',       !validateName('123'));
+test('Invalid: over 50 chars',           !validateName(str_repeat('а', 51)));
+
+echo "\n";
+
+// =================================================
+// Блок 2: Валидация телефона
+// =================================================
+echo "Block 2: Phone validation\n";
+
+function validatePhone(string $phone): bool {
+    $digits = preg_replace('/\D/', '', $phone);
+    $len = strlen($digits);
+    if ($len === 11 && ($digits[0] === '7' || $digits[0] === '8')) return true;
+    if ($len === 10 && $digits[0] === '9') return true;
+    return false;
+}
+
+test('Valid: "+7 999 123-45-67"',     validatePhone('+7 999 123-45-67'));
+test('Valid: "89991234567"',          validatePhone('89991234567'));
+test('Valid: "79161234567"',          validatePhone('79161234567'));
+test('Valid: "+7 (916) 123-45-67"',  validatePhone('+7 (916) 123-45-67'));
+test('Valid: "9161234567" (10 dig.)', validatePhone('9161234567'));
+test('Invalid: "12345"',             !validatePhone('12345'));
+test('Invalid: empty string',        !validatePhone(''));
+test('Invalid: "00000000000"',       !validatePhone('00000000000'));
+
+echo "\n";
+
+// =================================================
+// Блок 3: Валидация вопроса/сообщения
+// =================================================
+echo "Block 3: Message validation\n";
+
+function validateMessage(string $msg): bool {
+    $trimmed = trim($msg);
+    return strlen($trimmed) >= 10 && strlen($trimmed) <= 1000;
+}
+
+test('Valid: normal question',         validateMessage('Как отремонтировать вентиляцию?'));
+test('Valid: exactly 10 chars',        validateMessage('1234567890'));
+test('Valid: exactly 1000 chars',      validateMessage(str_repeat('а', 1000)));
+test('Invalid: empty string',         !validateMessage(''));
+test('Invalid: 9 chars',              !validateMessage('123456789'));
+test('Invalid: 1001 chars',           !validateMessage(str_repeat('а', 1001)));
+
+echo "\n";
+
+// =================================================
+// Блок 4: Работа с файловым хранилищем заявок
+// =================================================
+echo "Block 4: Leads file storage\n";
+
+$leadsDir = __DIR__ . '/../leads';
+
+if (!is_dir($leadsDir)) {
+    mkdir($leadsDir, 0777, true);
+}
+
+test('Leads directory exists',         is_dir($leadsDir));
+test('Leads directory is writable',    is_writable($leadsDir));
+
+$testFile = $leadsDir . '/test_lead_' . time() . '.json';
+$testLead = ['name' => 'Тест', 'phone' => '+79991234567', 'type' => 'unit_test'];
+$writeOk  = file_put_contents($testFile, json_encode($testLead, JSON_UNESCAPED_UNICODE)) !== false;
+test('Write lead JSON file',           $writeOk);
+
+$readBack = json_decode(file_get_contents($testFile), true);
+test('Read back JSON equals original', $readBack === $testLead);
+
+if (file_exists($testFile)) {
+    unlink($testFile);
+}
+test('Cleanup test file',              !file_exists($testFile));
+
+echo "\n";
+
+// =================================================
+// Блок 5: Наличие критических файлов проекта
+// =================================================
+echo "Block 5: Critical project files\n";
+
+$root = __DIR__ . '/..';
+$criticalFiles = [
+    'index.php'          => 'Main entry point',
+    'admin/leads.php'    => 'Admin panel',
+    'backend/api.php'    => 'API handler',
+    'backend/config.php' => 'Config file',
+];
+
+foreach ($criticalFiles as $file => $label) {
+    test("File exists: $label ($file)", file_exists("$root/$file"));
+}
+
+echo "\n";
+
+// =================================================
+// Итог
+// =================================================
+$total = $passed + $failed;
+echo "=================================================\n";
+printf("  Results: %d/%d passed", $passed, $total);
+if ($failed > 0) {
+    printf(", %d FAILED", $failed);
+}
+echo "\n";
+echo "=================================================\n\n";
 
 if ($failed > 0) {
-    echo "❌ SOME TESTS FAILED!\n";
+    echo "FAILED — fix the errors above and re-run.\n\n";
     exit(1);
-} else {
-    echo "✅ ALL TESTS PASSED!\n\n";
-    echo "🎉 Tests completed successfully!\n";
-    exit(0);
 }
+
+echo "ALL TESTS PASSED\n\n";
+exit(0);

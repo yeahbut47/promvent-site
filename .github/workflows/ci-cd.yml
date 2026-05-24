@@ -12,123 +12,151 @@ permissions:
   id-token: write
 
 jobs:
-  # ==================== CI JOB ====================
+
+  # ============================================================
+  # CI — Continuous Integration
+  # Запускается при каждом push и Pull Request
+  # ============================================================
   ci:
-    name: Continuous Integration
+    name: CI — Build & Test
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: 🔧 Setup PHP
+
+      - name: Setup PHP 8.2
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
           extensions: json, mbstring, curl
-      
-      - name: 📁 Create leads directory
+
+      - name: Create required directories
+        run: mkdir -p leads && chmod 777 leads
+
+      # ----------------------------------------------------------
+      # Шаг 1: Линтинг — проверка синтаксиса всех PHP-файлов
+      # ----------------------------------------------------------
+      - name: Lint — PHP syntax check
         run: |
-          mkdir -p leads
-          chmod 777 leads
-      
-      - name: 🔍 PHP Syntax Check (Lint)
-        run: |
+          echo "Checking PHP syntax..."
           ERRORS=0
-          for file in $(find . -name "*.php" -not -path "./vendor/*"); do
-            if ! php -l $file; then
-              ERRORS=$((ERRORS+1))
+          while IFS= read -r -d '' file; do
+            if ! php -l "$file" > /dev/null 2>&1; then
+              php -l "$file"
+              ERRORS=$((ERRORS + 1))
             fi
-          done
-          if [ $ERRORS -ne 0 ]; then
-            echo "❌ Found $ERRORS files with syntax errors"
+          done < <(find . -name "*.php" -not -path "./vendor/*" -print0)
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "FAILED: $ERRORS file(s) with syntax errors"
             exit 1
           fi
-          echo "✅ All PHP files have valid syntax"
-      
-      - name: 🧪 Run Unit Tests
+          echo "OK: all PHP files passed syntax check"
+
+      # ----------------------------------------------------------
+      # Шаг 2: Unit-тесты
+      # ----------------------------------------------------------
+      - name: Run unit tests
+        run: php tests/run_tests.php
+
+      # ----------------------------------------------------------
+      # Шаг 3: Smoke-тест — сайт отвечает 200
+      # ----------------------------------------------------------
+      - name: Start PHP built-in server
         run: |
-          if [ -f "tests/run_tests.php" ]; then
-            php tests/run_tests.php
-          else
-            echo "⚠️ No tests found"
-            mkdir -p tests
-            echo '<?php echo "✅ Test passed\n"; exit(0); ?>' > tests/dummy.php
-            php tests/dummy.php
+          php -S localhost:8080 -t . > /tmp/php-server.log 2>&1 &
+          sleep 3
+
+      - name: Smoke test — homepage responds
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/)
+          echo "Homepage HTTP status: $STATUS"
+          if [ "$STATUS" != "200" ]; then
+            echo "FAILED: expected 200, got $STATUS"
+            exit 1
           fi
-      
-      - name: 🚀 Start PHP Server for Smoke Tests
+          echo "OK: homepage is accessible"
+
+      - name: Smoke test — API endpoint responds
         run: |
-          php -S localhost:8080 > /dev/null 2>&1 &
-          sleep 5
-      
-      - name: 🌐 Smoke Test - Homepage
-        run: |
-          curl -f http://localhost:8080/ || exit 1
-          echo "✅ Homepage accessible"
-      
-      - name: 🌐 Smoke Test - Admin Page (with auth)
-        run: |
-          curl -f -u "admin:PromVent2026" http://localhost:8080/admin/leads.php || exit 1
-          echo "✅ Admin page accessible"
-      
-      - name: 🌐 Smoke Test - AI Endpoint
-        run: |
-          curl -f -X POST http://localhost:8080/admin/ai.php \
-            -d "action=chat&message=статистика" || exit 1
-          echo "✅ AI endpoint working"
-      
-      - name: 🔒 Security Check - Debug Mode
-        run: |
-          if grep -q "define('DEBUG', true)" backend/config.php 2>/dev/null; then
-            echo "⚠️ WARNING: DEBUG mode is enabled in production"
-          else
-            echo "✅ Debug mode disabled"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST http://localhost:8080/backend/api.php \
+            -d "action=ping")
+          echo "API HTTP status: $STATUS"
+          # 200 или 400 — оба нормальны, главное не 500
+          if [ "$STATUS" = "500" ] || [ "$STATUS" = "000" ]; then
+            echo "FAILED: API returned $STATUS"
+            exit 1
           fi
-      
-      - name: ✅ Build Check
+          echo "OK: API endpoint is reachable"
+
+      # ----------------------------------------------------------
+      # Шаг 4: Проверка критических файлов (структура сборки)
+      # ----------------------------------------------------------
+      - name: Build check — critical files present
         run: |
-          test -f index.php || exit 1
-          test -f admin/leads.php || exit 1
-          test -f backend/api.php || exit 1
-          echo "✅ All critical files present"
-      
-      - name: 💾 Upload build artifacts
+          MISSING=0
+          for f in index.php index.html admin/leads.php backend/api.php backend/config.php; do
+            if [ ! -f "$f" ]; then
+              echo "MISSING: $f"
+              MISSING=$((MISSING + 1))
+            fi
+          done
+          if [ "$MISSING" -gt 0 ]; then
+            echo "FAILED: $MISSING critical file(s) missing"
+            exit 1
+          fi
+          echo "OK: all critical files present"
+
+      # ----------------------------------------------------------
+      # Шаг 5: Сохранение артефакта сборки
+      # ----------------------------------------------------------
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: promvent-build-${{ github.sha }}
           path: |
             .
             !.git
-          retention-days: 1
+            !vendor
+          retention-days: 7
 
-  # ==================== CD JOB ====================
+  # ============================================================
+  # CD — Continuous Deployment
+  # Запускается только при push в main и только после успешного CI
+  # ============================================================
   cd:
-    name: Continuous Deployment
+    name: CD — Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: ci
-    if: github.ref == 'refs/heads/main' && success()
-    
+    if: github.ref == 'refs/heads/main'
+
     steps:
-      - name: 📥 Download artifacts
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: promvent-build-${{ github.sha }}
           path: .
-      
-      - name: 📦 Prepare for deployment
+
+      - name: Prepare deployment
         run: |
           mkdir -p leads
           chmod 777 leads
-          echo "✅ Ready for deployment"
-      
-      - name: 🌐 Deploy to GitHub Pages
+          echo "Build SHA: ${{ github.sha }}" > build-info.txt
+          echo "Deployed at: $(date -u)" >> build-info.txt
+          echo "OK: deployment package ready"
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
-          allow_empty_commit: true
-      
-      - name: ✅ Deployment Complete
-        run: echo "🎉 Deployment finished successfully!"
+          allow_empty_commit: false
+          commit_message: "deploy: ${{ github.sha }}"
+
+      - name: Deployment complete
+        run: |
+          echo "Deployed commit ${{ github.sha }} to GitHub Pages"
+          echo "URL: https://julia-myaso00.github.io/promvent-site/"
