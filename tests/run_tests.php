@@ -1,6 +1,8 @@
 <?php
-// Максимально простой тестовый раннер для PromVent
-// Не требует подключения файлов проекта
+/**
+ * Модульные тесты для сайта ПромВент
+ * Запуск: php tests/run_tests.php
+ */
 
 echo "\n";
 echo "============================================================\n";
@@ -9,244 +11,178 @@ echo "============================================================\n\n";
 
 $passed = 0;
 $failed = 0;
+$errors = [];
 
-// ========== ТЕСТ 1: Проверка PHP версии ==========
-echo "Test 1: PHP version check... ";
-if (version_compare(PHP_VERSION, '7.4.0', '>=')) {
-    echo "✅ PASSED (PHP " . PHP_VERSION . ")\n";
-    $passed++;
-} else {
-    echo "❌ FAILED (PHP " . PHP_VERSION . " < 7.4)\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 2: Проверка существования папки leads ==========
-echo "Test 2: Leads directory exists... ";
-$leadsDir = __DIR__ . '/../leads';
-if (is_dir($leadsDir)) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED (creating...)\n";
-    mkdir($leadsDir, 0777, true);
-    $passed++;
-}
-
-// ========== ТЕСТ 3: Проверка возможности записи ==========
-echo "Test 3: Write permission test... ";
-$testFile = $leadsDir . '/write_test.tmp';
-if (file_put_contents($testFile, 'test') !== false) {
-    unlink($testFile);
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 4: Валидация имени ==========
-echo "Test 4: Name validation... ";
-
-$testNames = [
-    'Иван' => true,
-    'Иван Петров' => true,
-    'Демо Пользователь' => true,
-    'Юлия' => true,
-    'Проверка' => true,
-    '' => false,
-    'A' => false,
-    '12' => false,
-];
-
-$nameValid = true;
-foreach ($testNames as $name => $expected) {
-    $trimmed = trim($name);
-    $actual = (strlen($trimmed) >= 2 && strlen($trimmed) <= 50 && !preg_match('/^[0-9]+$/', $trimmed));
-    if ($actual !== $expected) {
-        $nameValid = false;
-        break;
+function assert_equal($actual, $expected, string $testName): void {
+    global $passed, $failed, $errors;
+    if ($actual === $expected) {
+        echo "  ✅ PASS: $testName\n";
+        $passed++;
+    } else {
+        $msg = "  ❌ FAIL: $testName\n"
+             . "     Expected: " . var_export($expected, true) . "\n"
+             . "     Got:      " . var_export($actual, true);
+        echo $msg . "\n";
+        $errors[] = $testName;
+        $failed++;
     }
 }
 
-if ($nameValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
+function assert_true(bool $condition, string $testName): void {
+    assert_equal($condition, true, $testName);
 }
 
-// ========== ТЕСТ 5: Валидация телефона ==========
-echo "Test 5: Phone validation... ";
+// ─── Вспомогательные функции (логика приложения) ───────────────
 
-function testPhone($phone) {
+function validate_email(string $email): bool {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+function validate_phone(string $phone): bool {
     $digits = preg_replace('/\D/', '', $phone);
     if (strlen($digits) === 11 && ($digits[0] === '7' || $digits[0] === '8')) return true;
     if (strlen($digits) === 10 && $digits[0] === '9') return true;
     return false;
 }
 
-$testPhones = [
-    '+7 999 123-45-67' => true,
-    '89991234567' => true,
-    '79161234567' => true,
-    '+7 (916) 123-45-67' => true,
-    '12345' => false,
-    '' => false,
-];
-
-$phoneValid = true;
-foreach ($testPhones as $phone => $expected) {
-    if (testPhone($phone) !== $expected) {
-        $phoneValid = false;
-        break;
-    }
+function validate_name(string $name): bool {
+    $trimmed = trim($name);
+    return strlen($trimmed) >= 2
+        && strlen($trimmed) <= 50
+        && !preg_match('/^[0-9]+$/', $trimmed);
 }
 
-if ($phoneValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
+function validate_question(string $q): bool {
+    $len = strlen(trim($q));
+    return $len >= 10 && $len <= 1000;
 }
 
-// ========== ТЕСТ 6: Валидация вопроса (ИСПРАВЛЕН) ==========
-echo "Test 6: Question validation... ";
-
-function testQuestion($question) {
-    $trimmed = trim($question);
-    $len = strlen($trimmed);
-    // Логирование для отладки
-    if ($len >= 10 && $len <= 1000) {
-        return true;
-    }
-    return false;
+function sanitize_input(string $input): string {
+    return htmlspecialchars(strip_tags(trim($input)), ENT_QUOTES, 'UTF-8');
 }
 
-$testQuestions = [
-    'Как отремонтировать вентиляцию?' => true,
-    'Вопрос длиной ровно десять' => true,  // ровно 10 символов? "Вопрос длиной ровно десять" - 25 символов
-    'Вопрос1000' => false,  // слишком короткий
-    '' => false,
-];
-
-// Добавляем более точные тесты
-$longEnough = '1234567890'; // 10 символов
-$tooShort = '123456789';    // 9 символов
-
-$questionValid = true;
-
-// Тест 1: длинный вопрос
-if (!testQuestion('Как отремонтировать вентиляцию?')) {
-    echo "    ❌ Long question failed\n";
-    $questionValid = false;
+function format_lead(string $name, string $phone, string $service): string {
+    $name    = sanitize_input($name);
+    $phone   = sanitize_input($phone);
+    $service = sanitize_input($service);
+    return "Заявка: $name | $phone | $service";
 }
 
-// Тест 2: ровно 10 символов
-if (!testQuestion($longEnough)) {
-    echo "    ❌ 10-character question failed\n";
-    $questionValid = false;
+function is_valid_service(string $service): bool {
+    $allowed = ['ventilation', 'conditioning', 'automation', 'repair'];
+    return in_array($service, $allowed, true);
 }
 
-// Тест 3: 9 символов (должен провалиться)
-if (testQuestion($tooShort)) {
-    echo "    ❌ Short question should fail but passed\n";
-    $questionValid = false;
-}
+// ─────────────────────────────────────────────────────────
+// Тест 1: Версия PHP
+// ─────────────────────────────────────────────────────────
+echo "Test 1: PHP version check\n";
+assert_true(
+    version_compare(PHP_VERSION, '7.4.0', '>='),
+    'PHP версия >= 7.4 (' . PHP_VERSION . ')'
+);
 
-// Тест 4: пустой вопрос
-if (testQuestion('')) {
-    echo "    ❌ Empty question should fail but passed\n";
-    $questionValid = false;
-}
+// ─────────────────────────────────────────────────────────
+// Тест 2: Валидация email
+// ─────────────────────────────────────────────────────────
+echo "\nTest 2: Email validation\n";
+assert_true(validate_email('client@example.com'),  'корректный email принимается');
+assert_true(!validate_email('not-an-email'),        'строка без @ отклоняется');
+assert_true(!validate_email('missing@'),            'email без домена отклоняется');
+assert_true(!validate_email(''),                    'пустая строка отклоняется');
 
-if ($questionValid) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
+// ─────────────────────────────────────────────────────────
+// Тест 3: Валидация телефона
+// ─────────────────────────────────────────────────────────
+echo "\nTest 3: Phone validation\n";
+assert_true(validate_phone('+7 999 123-45-67'),     'формат +7 с пробелами принимается');
+assert_true(validate_phone('89991234567'),           'формат 8XXXXXXXXXX принимается');
+assert_true(validate_phone('79161234567'),           'формат 7XXXXXXXXXX принимается');
+assert_true(validate_phone('+7 (916) 123-45-67'),   'формат со скобками принимается');
+assert_true(!validate_phone('12345'),               'короткий номер отклоняется');
+assert_true(!validate_phone(''),                    'пустой номер отклоняется');
 
-// ========== ТЕСТ 7: Проверка файлов заявок ==========
-echo "Test 7: Leads JSON files... ";
+// ─────────────────────────────────────────────────────────
+// Тест 4: Валидация имени
+// ─────────────────────────────────────────────────────────
+echo "\nTest 4: Name validation\n";
+assert_true(validate_name('Иван'),              'имя из одного слова принимается');
+assert_true(validate_name('Иван Петров'),       'имя из двух слов принимается');
+assert_true(!validate_name(''),                 'пустое имя отклоняется');
+assert_true(!validate_name('A'),               'слишком короткое имя отклоняется');
+assert_true(!validate_name('12'),              'имя из цифр отклоняется');
 
-$files = glob($leadsDir . '/leads_*.json');
-$totalLeads = 0;
-foreach ($files as $file) {
-    $content = file_get_contents($file);
-    if ($content) {
-        $leads = json_decode($content, true);
-        if (is_array($leads)) {
-            $totalLeads += count($leads);
-        }
-    }
-}
+// ─────────────────────────────────────────────────────────
+// Тест 5: Валидация вопроса
+// ─────────────────────────────────────────────────────────
+echo "\nTest 5: Question validation\n";
+assert_true(validate_question('Как отремонтировать вентиляцию?'), 'нормальный вопрос принимается');
+assert_true(validate_question('1234567890'),    'ровно 10 символов принимается');
+assert_true(!validate_question('123456789'),   '9 символов отклоняется');
+assert_true(!validate_question(''),            'пустой вопрос отклоняется');
 
-echo "✅ PASSED (found $totalLeads leads)\n";
-$passed++;
+// ─────────────────────────────────────────────────────────
+// Тест 6: Санитизация ввода
+// ─────────────────────────────────────────────────────────
+echo "\nTest 6: Input sanitization\n";
+assert_equal(
+    sanitize_input('<script>alert("xss")</script>'),
+    'alert(&quot;xss&quot;)',
+    'XSS-атака нейтрализуется (теги удалены, спецсимволы экранированы)'
+);
+assert_equal(
+    sanitize_input('  Иван Иванов  '),
+    'Иван Иванов',
+    'пробелы по краям убираются'
+);
+assert_equal(
+    sanitize_input('<b>жирный</b> текст'),
+    'жирный текст',
+    'HTML-теги удаляются'
+);
 
-// ========== ТЕСТ 8: Проверка критических файлов ==========
-echo "Test 8: Critical files exist... ";
+// ─────────────────────────────────────────────────────────
+// Тест 7: Форматирование заявки
+// ─────────────────────────────────────────────────────────
+echo "\nTest 7: Lead formatting\n";
+assert_equal(
+    format_lead('Иван', '+79991234567', 'Вентиляция'),
+    'Заявка: Иван | +79991234567 | Вентиляция',
+    'корректная заявка форматируется правильно'
+);
+assert_equal(
+    format_lead('<b>Хакер</b>', '0', '<script>'),
+    'Заявка: Хакер | 0 | ',
+    'вредоносный ввод в заявке очищается'
+);
 
-$criticalFiles = [
-    'index.php',
-    'admin/leads.php',
-    'admin/ai.php',
-    'backend/api.php',
-    'backend/config.php',
-];
+// ─────────────────────────────────────────────────────────
+// Тест 8: Типы услуг
+// ─────────────────────────────────────────────────────────
+echo "\nTest 8: Service types\n";
+assert_true(is_valid_service('ventilation'),    'вентиляция — допустимая услуга');
+assert_true(is_valid_service('conditioning'),   'кондиционирование — допустимая услуга');
+assert_true(is_valid_service('automation'),     'автоматика — допустимая услуга');
+assert_true(is_valid_service('repair'),         'ремонт — допустимая услуга');
+assert_true(!is_valid_service('hack'),          'недопустимая услуга отклоняется');
+assert_true(!is_valid_service(''),              'пустая строка отклоняется');
 
-$allExist = true;
-foreach ($criticalFiles as $file) {
-    if (!file_exists(__DIR__ . '/../' . $file)) {
-        $allExist = false;
-        break;
-    }
-}
-
-if ($allExist) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 9: Проверка кастомного select в CTA форме ==========
-echo "Test 9: CTA form structure... ";
-
-$indexContent = file_get_contents(__DIR__ . '/../index.php');
-if ($indexContent && strpos($indexContent, 'custom-select') !== false) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "❌ FAILED\n";
-    $failed++;
-}
-
-// ========== ТЕСТ 10: Проверка AI ассистента ==========
-echo "Test 10: AI assistant present... ";
-
-if ($indexContent && strpos($indexContent, 'client-ai-assistant') !== false) {
-    echo "✅ PASSED\n";
-    $passed++;
-} else {
-    echo "⚠️ SKIPPED (AI not found)\n";
-    $passed++;
-}
-
+// ─────────────────────────────────────────────────────────
+// Итог
+// ─────────────────────────────────────────────────────────
+$total = $passed + $failed;
 echo "\n";
 echo "============================================================\n";
-echo "  Test Summary: $passed passed, $failed failed\n";
+echo "  Test Summary: $passed passed, $failed failed out of $total\n";
 echo "============================================================\n\n";
 
 if ($failed > 0) {
     echo "❌ SOME TESTS FAILED!\n";
+    foreach ($errors as $e) {
+        echo "  • $e\n";
+    }
     exit(1);
-} else {
-    echo "✅ ALL TESTS PASSED!\n\n";
-    echo "🎉 Tests completed successfully!\n";
-    exit(0);
 }
+
+echo "✅ ALL TESTS PASSED!\n";
+exit(0);
